@@ -1,0 +1,57 @@
+version: '3.0'
+services:
+  rabbitmq:
+    hostname: rabbitmq
+    container_name: rabbitmq_rb
+    image: rabbitmq:3.7-management
+    environment:
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "12345678"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    # network_mode: some-network
+
+  phoenix_api:  
+    build: phoenix/
+    ports:
+      - "5000:5000"
+    links:
+      - rabbitmq
+    # network_mode: some-network
+
+  mail_service:
+    build: mail_service/
+    hostname: mail_service
+    command: sh ../run_mail_service.sh
+    depends_on: 
+      - rabbitmq
+    links:
+      - rabbitmq
+    # network_mode: some-network
+
+  user_microservice:
+    build: user_microservice/
+    hostname: user_microservice
+    command: sh ../user_microservice.sh
+    depends_on: 
+      - rabbitmq
+    links:
+      - rabbitmq
+    # network_mode: some-network
+
+  database:
+    image: postgres:9.6
+    container_name: "postgres"
+    environment:
+      - POSTGRES_DB=12345678
+      - POSTGRES_USER=postgres
+      - TZ=GMT
+    ports:
+      - 5432:5432
+    # network_mode: some-network
+
+# networks:
+#   some-network:
+#     name: some-network
+#     driver: bridge
