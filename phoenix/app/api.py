@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_restplus import Api, Resource
 from models import UserModel
+from amqp import open_conn
+from amqp import produce_message
 
 
 app = Flask(__name__)
@@ -16,6 +18,8 @@ class UserList(Resource):
     
     @api_usuarios.expect(UserModel.model, validate=True)
     def post(self):
+        produce_message("create", {})
+        print('SEND MESSAGE')
         return {}, 201
 
     def get(self):

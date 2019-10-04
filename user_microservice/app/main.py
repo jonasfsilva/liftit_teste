@@ -5,7 +5,7 @@ from consumers import default_callback
 
 def run_consumers():
     connection = open_conn()
-    queue = 'users_to_create'
+    queue = 'create'
     start_consumers(connection, default_callback, queue)
 
 
