@@ -1,4 +1,5 @@
 import pika
+import json
 
 
 BROKER_URL = 'amqp://admin:12345678@rabbitmq_rb/'
@@ -10,26 +11,32 @@ def open_conn():
     return connection
 
 
-def declare_queue(connection, queue):
+def produce_message(queued, message):
+    connection = open_conn()
     channel = connection.channel()
-    channel.queue_declare(queue=queue)
-    return channel
+    channel.exchange_declare(exchange='users', exchange_type='topic')
 
+    try:
+        channel.basic_publish(exchange='users', routing_key=queued, body=json.dumps(message))
+    except Exception as e:
+        print(e)
+        raise e
 
-def produce_message(message, connection):
-    channel = declare_queue(connection)
-    channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
-
-    print(" [x] Sent 'Hello World!'")
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
+    print(" <== [x] Sent : %r" % message)
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
     connection.close()
 
 
-# def default_callback(ch, method, properties, body):
-#     print(" [x] Received %r" % body)
-
-
 def start_consumers(connection, callback_func, queue):
-    channel = declare_queue(connection, queue)
+    channel = connection.channel()
+    channel.exchange_declare(
+        exchange='users', exchange_type='topic')
+
+    channel.queue_declare(queue=queue)
+    channel.queue_bind(exchange='users', queue=queue)
     channel.basic_consume(
         queue=queue, on_message_callback=callback_func, auto_ack=True)
 

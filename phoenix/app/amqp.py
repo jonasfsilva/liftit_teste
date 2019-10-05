@@ -11,12 +11,6 @@ def open_conn():
     return connection
 
 
-def declare_queue(connection, queue):
-    channel = connection.channel()
-    channel.queue_declare(queue=queue)
-    return channel
-
-
 def produce_message(queued, message):
     connection = open_conn()
     channel = connection.channel()
@@ -28,12 +22,21 @@ def produce_message(queued, message):
         print(e)
         raise e
 
-    print(" [x] Sent %r" % message)
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
+    print(" <== [x] Sent : %r" % message)
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
     connection.close()
 
 
 def start_consumers(connection, callback_func, queue):
-    channel = declare_queue(connection, queue)
+    channel = connection.channel()
+    channel.exchange_declare(
+        exchange='users', exchange_type='topic')
+
+    channel.queue_declare(queue=queue)
+    channel.queue_bind(exchange='users', queue=queue)
     channel.basic_consume(
         queue=queue, on_message_callback=callback_func, auto_ack=True)
 

@@ -1,5 +1,7 @@
+import json
 from flask import Flask
 from flask_restplus import Api, Resource
+from flask import request
 from models import UserModel
 from amqp import open_conn
 from amqp import produce_message
@@ -18,12 +20,8 @@ class UserList(Resource):
     
     @api_usuarios.expect(UserModel.model, validate=True)
     def post(self):
-        produce_message("create", {})
-        print('SEND MESSAGE')
+        produce_message("create", json.loads(request.data))
         return {}, 201
-
-    def get(self):
-        return [], 200
 
 
 if __name__ == '__main__':

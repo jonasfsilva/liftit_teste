@@ -1,4 +1,5 @@
 import pika
+import json
 
 
 BROKER_URL = 'amqp://admin:12345678@rabbitmq_rb/'
@@ -21,8 +22,13 @@ def produce_message(queued, message):
         print(e)
         raise e
 
-    print(" [x] Sent %r" % message)
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
+    print(" <== [x] Sent : %r" % message)
+    print(" <======================================================================> ")
+    print(" <======================================================================> ")
     connection.close()
+
 
 def start_consumers(connection, callback_func, queue):
     channel = connection.channel()

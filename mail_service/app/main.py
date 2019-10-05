@@ -5,7 +5,7 @@ from consumers import default_callback
 
 def run_consumers():
     connection = open_conn()
-    queue = 'send_confirmation_email'
+    queue = 'send_email'
     start_consumers(connection, default_callback, queue)
 
 
