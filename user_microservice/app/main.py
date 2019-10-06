@@ -11,10 +11,7 @@ def run_consumers():
 
 def main():
     run_consumers()
-    # TODO consumir o que veio da API
-    # TODO produzir para o envio de email
-    # pass
-
+    
 
 if __name__ == "__main__":
     main()

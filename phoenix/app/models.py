@@ -1,4 +1,15 @@
+import re
 from flask_restplus import Namespace, fields
+
+
+def validate_payload(payload):
+    pattern_int = re.compile(r"(0|-?[1-9][0-9]*)")
+    telefone = payload.get('telefone')
+
+    if not telefone.isdigit():
+        return {
+            "message": "The phone number is not a integer"
+        }, 400   
 
 
 class UserModel:
@@ -13,13 +24,3 @@ class UserModel:
         "senha": fields.String(required=True, description=(u'Senha')),
         "verificado": fields.Boolean(required=True, description=(u'Verificado')),
     })
-
-    # ● Nome (string: obrigatório)
-    # ● Email (string: obrigatório)
-    # ● Senha (string: Obrigatório, Hash)
-    # ● Verificado (boolean: obrigatório)
-    # ● Número de telefone(string: obrigatório)
-    
-    # ● País (string)
-    # ● Cidade (string)
-    # ● Endereço (string)

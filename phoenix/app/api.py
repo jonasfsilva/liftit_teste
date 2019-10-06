@@ -5,6 +5,7 @@ from flask import request
 from models import UserModel
 from amqp import open_conn
 from amqp import produce_message
+from models import validate_payload
 
 
 app = Flask(__name__)
@@ -19,9 +20,17 @@ api.add_namespace(api_usuarios)
 class UserList(Resource):
     
     @api_usuarios.expect(UserModel.model, validate=True)
-    def post(self):
-        produce_message("create", json.loads(request.data))
-        return {}, 201
+    def post(self): 
+        payload = json.loads(request.data)
+        custom_erros = validate_payload(payload)
+
+        if custom_erros:
+            return custom_erros
+
+        produce_message("create", payload)
+        return {
+            "message" : "Usuarios Criado com Sucesso"
+        }, 201
 
 
 if __name__ == '__main__':
