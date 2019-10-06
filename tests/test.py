@@ -45,23 +45,7 @@ class TestPhoenixServer(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
 
-# class TestRabbitServer(unittest.TestCase):
-    
-#     def setUp(self):
-#         print('SETUP')
-#         pass
-
-   
-#     def test_can_send_message_to_rabbit_client(self):
-#         pass
-
-
-#     def test_can_receive_message_in_rabbit_client(self):
-#         pass
-
-
-
 if __name__=='__main__':
     
-    time.sleep(25)
+    time.sleep(30)
     unittest.main()

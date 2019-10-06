@@ -12,3 +12,13 @@ Liftit Teste
     - docker-compose up
     - Acessar o swagger em http://localhost:5000/
 
+# Tecnologias Utilizadas
+
+    - Python
+    - Flask, FlaskRestplus
+    - RabbitMQ
+    - Docker
+    - Docker-compose
+
+# Fluxo da Aplicação
+![alt text](./fluxo.jpg)
