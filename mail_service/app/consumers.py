@@ -1,4 +1,5 @@
 import json 
+from services import send_message_to_confirmation_user
 
 
 def default_callback(ch, method, properties, body):
@@ -6,4 +7,5 @@ def default_callback(ch, method, properties, body):
     print('RECEIVE MESSAGE MAIL MICROSERVICE')
     payload = json.loads(body)
     print(" [x] Received %r" % payload)
-    print('SEND EMAIL')
+    send_message_to_confirmation_user(payload)
+

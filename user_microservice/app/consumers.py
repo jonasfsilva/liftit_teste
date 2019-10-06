@@ -1,6 +1,6 @@
 import json
-from amqp import produce_message
-from database import User
+from services import save_user_on_db
+from services import send_message_email_notifications_service
 
 
 def default_callback(ch, method, properties, body):
@@ -10,12 +10,7 @@ def default_callback(ch, method, properties, body):
     print(" [x] Received %r" % payload)
 
     try:
-        user_created = User.create(
-            **payload
-        )
-        print('CREATED USER', user_created)
+        user_data = save_user_on_db(payload)
+        send_message_email_notifications_service(user_data)
     except Exception as e:
-        print(e)
         raise e
-
-    produce_message('send_email', payload)
