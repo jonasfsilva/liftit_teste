@@ -4,7 +4,6 @@ LABEL maintainer="Jonas Ferreira"
 ENV PYTHONUNBUFFERED 1
 ENV FLASK_APP=api.py
 
-
 RUN mkdir /code
 WORKDIR /code
 COPY . /code

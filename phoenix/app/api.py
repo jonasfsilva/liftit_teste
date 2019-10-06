@@ -29,7 +29,7 @@ class UserList(Resource):
 
         produce_message("create", payload)
         return {
-            "message" : "Usuarios Criado com Sucesso"
+            "message" : "Successfully Created User"
         }, 201
 
 

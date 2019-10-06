@@ -7,8 +7,6 @@ RUN mkdir /code
 WORKDIR /code
 COPY . /code
 
-# RUN apt-get update
-# RUN apt-get install build-essential -y
 RUN pip install pipenv
 RUN pipenv install --system
 
