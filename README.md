@@ -13,7 +13,7 @@ Liftit Teste
     - Acessar o swagger em http://localhost:5000/
     
     - Requisição Valida:
-        - curl localhost:5000/users/ -d '{  "nome": "string",  "email": "string",  "telefone": "989529891",  "pais": "string",  "cidade": "string",  "endereco": "string",  "senha": "string",  "verificado": true}' -H 'Content-Type: application/json'
+        curl localhost:5000/users/ -d '{  "nome": "string",  "email": "string",  "telefone": "989529891",  "pais": "string",  "cidade": "string",  "endereco": "string",  "senha": "string",  "verificado": true}' -H 'Content-Type: application/json'
 
     - Requisição Invalida:
         curl localhost:5000/users/ -d '{"foo": "bar"}' -H 'Content-Type: application/json'
