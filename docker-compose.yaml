@@ -19,6 +19,8 @@ services:
       - rabbitmq
     links:
       - rabbitmq
+    environment:
+      BROKER_URL: 'amqp://admin:12345678@rabbitmq_rb/'
 
   mail_service:
     build: mail_service/
@@ -28,6 +30,10 @@ services:
       - rabbitmq
     links:
       - rabbitmq
+    volumes:
+      - ./mail_service/app/:/code/app/
+    environment:
+      BROKER_URL: 'amqp://admin:12345678@rabbitmq_rb/'
 
   user_microservice:
     build: user_microservice/
@@ -39,3 +45,6 @@ services:
       - rabbitmq
     volumes:
       - ./user_microservice/app/:/code/app/
+    environment:
+      BROKER_URL: 'amqp://admin:12345678@rabbitmq_rb/'
+      DATABASE: 'production.db'      

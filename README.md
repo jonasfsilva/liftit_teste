@@ -11,6 +11,13 @@ Liftit Teste
 
     - docker-compose up
     - Acessar o swagger em http://localhost:5000/
+    
+    - Requisição Valida:
+        ``` "curl -X POST "http://localhost:5000/users/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"nome\": \"string\",  \"email\": \"string\",  \"telefone\": \"989529891\",  \"pais\": \"string\",  \"cidade\": \"string\",  \"endereco\": \"string\",  \"senha\": \"string\",  \"verificado\": true}" ```
+
+    - Requisição Invalida:
+        ``` "curl -X POST "http://localhost:5000/users/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"nome\": \"string\",  \"email\": \"string\",  \"telefone\": \"9895comletras29891\",  \"pais\": \"string\",  \"cidade\": \"string\",  \"endereco\": \"string\",  \"senha\": \"string\",  \"verificado\": true}" ```
+
 
 # Tecnologias Utilizadas
 

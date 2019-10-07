@@ -1,7 +1,10 @@
+import os
 from peewee import *
 
 
-db = SqliteDatabase('teste.db')
+DATABASE = os.getenv('DATABASE')
+print(DATABASE)
+db = SqliteDatabase(DATABASE)
 
 
 class User(Model):

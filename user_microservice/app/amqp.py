@@ -1,8 +1,9 @@
+import os
 import pika
 import json
 
 
-BROKER_URL = 'amqp://admin:12345678@rabbitmq_rb/'
+BROKER_URL = os.getenv('BROKER_URL')
 
 
 def open_conn():
