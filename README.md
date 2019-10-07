@@ -34,6 +34,7 @@ Liftit Teste
 
 
 # O que melhoraria:
+    - Criar Pacote para as funções de conexão e utilidades do AMQP para um Pypi Server Local
     - Testaria as conexões com rabbitmq, saidas de email, e envio e recebimentos de mensagens
     - Deixaria o prefixo base /api/{version} para o API Management
     - Usaria um API Gateway para orquestração e um Edge Router em Produção
