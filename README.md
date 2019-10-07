@@ -31,3 +31,10 @@ Liftit Teste
 
 # Fluxo da Aplicação
 ![alt text](./fluxo.jpg)
+
+
+# O que melhoraria:
+    - Testaria as conexões com rabbitmq, saidas de email, e envio e recebimentos de mensagens
+    - Deixaria o prefixo base /api/{version} para o API Management
+    - Usaria um API Gateway para orquestração e um Edge Router em Produção
+    - Salvaria os dados necessarios para os microserviços em bancos Nosql para autonomia dos serviços (com redundancia)
