@@ -39,9 +39,9 @@ def make_email(payload):
     msg = email.message.Message()
     msg['Subject'] = 'Confirmação de Usuario'
     
-    msg['From'] = 'ferreirajonasss@gmail.com'
+    msg['From'] = 'fake_email@gmail.com'
     msg['To'] = user_email
-    password = "taki2020"
+    password = "testepasswd"
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(email_content)
     
@@ -64,9 +64,8 @@ def send_message_to_confirmation_user(payload):
     
     nome = payload.get('nome')
     email = payload.get('email')
-    log_message = "Nome: {0} | Email: {1}".format(nome, email)
+    log_message = "Email enviado para | Nome: {0} | Email: {1}".format(nome, email)
     print(log_message)
     sys.stdout.write(log_message)
-    logging.info('SAVE EMAIL')
     logging.info(log_message)
     

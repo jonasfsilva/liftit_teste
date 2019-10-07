@@ -4,19 +4,21 @@ Liftit Teste
 
 # Como Testar a Aplicação
 
-    - docker-compose -f docker-compose.test.yaml up
+    - docker-compose -f docker-compose.test.yaml up --build
     - docker-compose -f docker-compose.test.yaml down
 
 # Como Executar o Projeto
 
-    - docker-compose up
+    - docker-compose up --build
     - Acessar o swagger em http://localhost:5000/
     
     - Requisição Valida:
-        ``` "curl -X POST "http://localhost:5000/users/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"nome\": \"string\",  \"email\": \"string\",  \"telefone\": \"989529891\",  \"pais\": \"string\",  \"cidade\": \"string\",  \"endereco\": \"string\",  \"senha\": \"string\",  \"verificado\": true}" ```
+        - curl localhost:5000/users/ -d '{  "nome": "string",  "email": "string",  "telefone": "989529891",  "pais": "string",  "cidade": "string",  "endereco": "string",  "senha": "string",  "verificado": true}' -H 'Content-Type: application/json'
 
     - Requisição Invalida:
-        ``` "curl -X POST "http://localhost:5000/users/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"nome\": \"string\",  \"email\": \"string\",  \"telefone\": \"9895comletras29891\",  \"pais\": \"string\",  \"cidade\": \"string\",  \"endereco\": \"string\",  \"senha\": \"string\",  \"verificado\": true}" ```
+        curl localhost:5000/users/ -d '{"foo": "bar"}' -H 'Content-Type: application/json'
+
+    - É possivel enviar requisições diretamente pelo swagger
 
 
 # Tecnologias Utilizadas
